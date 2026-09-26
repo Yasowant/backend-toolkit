@@ -1,0 +1,197 @@
+{
+  "name": "@yasowant/backend-toolkit",
+  "version": "0.1.0",
+  "description": "Modular, typed production backend utilities for Node.js and Express.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Yasowant",
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./async-handler": {
+      "import": {
+        "types": "./dist/async-handler/index.d.ts",
+        "default": "./dist/async-handler/index.js"
+      },
+      "require": {
+        "types": "./dist/async-handler/index.d.cts",
+        "default": "./dist/async-handler/index.cjs"
+      }
+    },
+    "./config": {
+      "import": {
+        "types": "./dist/config/index.d.ts",
+        "default": "./dist/config/index.js"
+      },
+      "require": {
+        "types": "./dist/config/index.d.cts",
+        "default": "./dist/config/index.cjs"
+      }
+    },
+    "./errors": {
+      "import": {
+        "types": "./dist/errors/index.d.ts",
+        "default": "./dist/errors/index.js"
+      },
+      "require": {
+        "types": "./dist/errors/index.d.cts",
+        "default": "./dist/errors/index.cjs"
+      }
+    },
+    "./logger": {
+      "import": {
+        "types": "./dist/logger/index.d.ts",
+        "default": "./dist/logger/index.js"
+      },
+      "require": {
+        "types": "./dist/logger/index.d.cts",
+        "default": "./dist/logger/index.cjs"
+      }
+    },
+    "./pagination": {
+      "import": {
+        "types": "./dist/pagination/index.d.ts",
+        "default": "./dist/pagination/index.js"
+      },
+      "require": {
+        "types": "./dist/pagination/index.d.cts",
+        "default": "./dist/pagination/index.cjs"
+      }
+    },
+    "./rbac": {
+      "import": {
+        "types": "./dist/rbac/index.d.ts",
+        "default": "./dist/rbac/index.js"
+      },
+      "require": {
+        "types": "./dist/rbac/index.d.cts",
+        "default": "./dist/rbac/index.cjs"
+      }
+    },
+    "./request-id": {
+      "import": {
+        "types": "./dist/request-id/index.d.ts",
+        "default": "./dist/request-id/index.js"
+      },
+      "require": {
+        "types": "./dist/request-id/index.d.cts",
+        "default": "./dist/request-id/index.cjs"
+      }
+    },
+    "./response": {
+      "import": {
+        "types": "./dist/response/index.d.ts",
+        "default": "./dist/response/index.js"
+      },
+      "require": {
+        "types": "./dist/response/index.d.cts",
+        "default": "./dist/response/index.cjs"
+      }
+    },
+    "./retry": {
+      "import": {
+        "types": "./dist/retry/index.d.ts",
+        "default": "./dist/retry/index.js"
+      },
+      "require": {
+        "types": "./dist/retry/index.d.cts",
+        "default": "./dist/retry/index.cjs"
+      }
+    },
+    "./shutdown": {
+      "import": {
+        "types": "./dist/shutdown/index.d.ts",
+        "default": "./dist/shutdown/index.js"
+      },
+      "require": {
+        "types": "./dist/shutdown/index.d.cts",
+        "default": "./dist/shutdown/index.cjs"
+      }
+    },
+    "./websocket": {
+      "import": {
+        "types": "./dist/websocket/index.d.ts",
+        "default": "./dist/websocket/index.js"
+      },
+      "require": {
+        "types": "./dist/websocket/index.d.cts",
+        "default": "./dist/websocket/index.cjs"
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run check",
+    "test:package": "node scripts/package-smoke.mjs"
+  },
+  "peerDependencies": {
+    "express": "^4.21.0 || ^5.0.0",
+    "ws": "^8.18.0"
+  },
+  "peerDependenciesMeta": {
+    "express": {
+      "optional": true
+    },
+    "ws": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "eslint": "^10.0.0",
+    "typescript-eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.9.0",
+    "tsup": "^8.0.0",
+    "vitest": "^5.0.2",
+    "@vitest/coverage-v8": "^5.0.2",
+    "@types/node": "^22.0.0",
+    "express": "^5.0.0",
+    "ws": "^8.18.0",
+    "supertest": "^7.0.0",
+    "@types/supertest": "^6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yasowant/backend-toolkit.git"
+  },
+  "homepage": "https://yasowant.github.io/backend-toolkit/",
+  "bugs": {
+    "url": "https://github.com/Yasowant/backend-toolkit/issues"
+  }
+}
