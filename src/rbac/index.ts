@@ -47,6 +47,14 @@ export function authorize(
         if (!principal) throw httpErrors.unauthorized();
         if (!hasAccess(principal, options)) throw httpErrors.forbidden();
       })
-      .then(() => next(), next);
+      .then(
+        () => next(),
+        (error: unknown) =>
+          next(
+            error instanceof Error
+              ? error
+              : new Error('Principal resolution failed', { cause: error }),
+          ),
+      );
   };
 }

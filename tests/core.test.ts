@@ -62,3 +62,18 @@ describe('errors and async routes', () => {
     expect((await request(app).get('/')).body).toEqual({ ok: true });
   });
 });
+
+it.each([undefined, null, false, 'route'])(
+  'forwards non-Error rejections safely (%s)',
+  async (value) => {
+    const app = express();
+    app.get(
+      '/',
+      asyncHandler(async () => {
+        throw value;
+      }),
+    );
+    app.use(errorHandler());
+    expect((await request(app).get('/')).status).toBe(500);
+  },
+);

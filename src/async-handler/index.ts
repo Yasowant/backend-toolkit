@@ -10,6 +10,12 @@ export function asyncHandler(
   return (req, res, next) => {
     Promise.resolve()
       .then(() => handler(req, res, next))
-      .catch(next);
+      .catch((error: unknown) =>
+        next(
+          error instanceof Error
+            ? error
+            : new Error('Route handler failed', { cause: error }),
+        ),
+      );
   };
 }

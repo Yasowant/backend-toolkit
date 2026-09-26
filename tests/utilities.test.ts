@@ -295,3 +295,31 @@ describe('shutdown', () => {
     ).toThrow();
   });
 });
+
+it.each([undefined, null, 'route'])(
+  'does not bypass authorization on a non-Error resolver rejection (%s)',
+  async (value) => {
+    const app = express();
+    app.get(
+      '/',
+      authorize({
+        permissions: ['read'],
+        getPrincipal: async () => {
+          throw value;
+        },
+      }),
+      (_req, res) => res.sendStatus(200),
+    );
+    app.use(
+      (
+        _error: unknown,
+        _req: express.Request,
+        res: express.Response,
+        _next: express.NextFunction,
+      ) => {
+        res.sendStatus(500);
+      },
+    );
+    expect((await request(app).get('/')).status).toBe(500);
+  },
+);
